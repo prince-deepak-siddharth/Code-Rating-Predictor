@@ -16,7 +16,7 @@ An innovative project using HTML, CSS, JavaScript, and Machine Learning to predi
 
 The **Code Rating Predictor** is a mini project that leverages the power of machine learning to predict a user's rating on one competitive programming platform based on their rating on another. Specifically, this project uses data from CodeChef and Codeforces to create a predictive model using linear regression.
 
-With a dataset of 11,000 users' ratings, the project demonstrates the practical application of data science and web development to create a useful tool for competitive programmers.
+With a dataset of 10,000+ users' ratings, the project demonstrates the practical application of data science and web development to create a useful tool for competitive programmers.
 
 ## Features
 
