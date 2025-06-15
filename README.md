@@ -1,4 +1,4 @@
-# 🏆 CP Rating Predictor
+# 🏆 Code Rating Predictor
 
 <div align="center">
 
