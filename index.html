@@ -3,48 +3,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>rating_converter</title>
+    <title>CP Rating Predictor | CodeChef & CodeForces</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Background particles -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-code"></i>
+            <span>CP Predictor</span>
+        </div>
+        
+        <div class="nav-links">
+            <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+            <a href="#features"><i class="fas fa-star"></i> Features</a>
+            <a href="https://github.com/princesiddharth1/Code-Rating-Predictor" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        </div>
+    </nav>
     
     <div class="container">
-        <span class="predicton">Rank Predictor</span>
-        <h1>Choose Your CP platform</h1>
-        <div class="button">
-            <button class="chef">CodeChef</button>
-            <button class="forces">CodeForces</button>
-        </div>
-        <div class="main">
-            <div class="about  ">
-                <h3>About</h3>
-                <p>
-                    This is a Rating predictor model which can predicts anyones
-                    rating on different platform based on the current rating of
-                    your active contest platform. Currently it supports only
-                    CodeChef and CodeForces. It is based on the linear
-                    regression model. It is trained on the data of 10,000+ users
-                    of CodeChef and CodeForces. Just enter your current rating
-                    and it will predict your rating on other platform.
-                </p>
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="logo-container">
+                <div class="cp-logo">
+                    <i class="fas fa-trophy"></i>
+                </div>
             </div>
-            <div class="ask hidden ">
-                <h3>Enter Rating</h3>
-                <input class ="input"type="numbers" placeholder="Rating">
-                <button>Submit</button>
+            <h1 class="main-title">
+                <span class="gradient-text">Competitive Programming</span><br>
+                <span class="sub-title">Rating Predictor</span>
+            </h1>
+            <p class="hero-description">
+                Predict your rating across platforms with ML precision
+            </p>
+        </div>
+
+        <!-- Platform Selection -->
+        <div class="platform-selection">
+            <h2>Choose Your Platform</h2>
+            <div class="platform-buttons">
+                <button class="platform-btn chef" data-platform="codechef">
+                    <div class="btn-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="btn-content">
+                        <h3>CodeChef</h3>
+                        <p>Cook → Force</p>
+                    </div>
+                    <div class="btn-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </button>
+                <button class="platform-btn forces" data-platform="codeforces">
+                    <div class="btn-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="btn-content">
+                        <h3>CodeForces</h3>
+                        <p>Force → Cook</p>
+                    </div>
+                    <div class="btn-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </button>
             </div>
-        </div>
-        <div class="result hidden">
-            <h3>your</h3>
-            <h4>result</h4>
-        </div>
-        <div class="footer">
-            <h4>Turning numbers into narratives, one rank at a time. </h4>
-            <h4>PDS</h4>
+        </div>        <!-- Content Sections -->
+        <div class="content-wrapper">
             
+            <!-- About Section -->
+            <div class="card about-card" id="about">
+                <div class="card-header">
+                    <i class="fas fa-info-circle"></i>
+                    <h3>About This Project</h3>
+                </div>
+                <div class="card-content">
+                    <div class="project-description">
+                        <p>
+                            The <strong>CP Rating Predictor</strong> is an intelligent machine learning tool designed to predict competitive programming ratings across different platforms. This project bridges the gap between CodeChef and CodeForces by providing accurate rating conversions based on statistical analysis of over 10,000+ user profiles.
+                        </p>
+                        <p>
+                            Built with modern web technologies and powered by linear regression algorithms, this tool helps competitive programmers understand their skill level equivalency across platforms, enabling better goal setting and progress tracking in their coding journey.
+                        </p>
+                        <div class="tech-stack">
+                            <h4>Technologies Used:</h4>
+                            <div class="tech-badges">
+                                <span class="tech-badge">HTML5</span>
+                                <span class="tech-badge">CSS3</span>
+                                <span class="tech-badge">JavaScript</span>
+                                <span class="tech-badge">Machine Learning</span>
+                                <span class="tech-badge">Linear Regression</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="card features-card" id="features">
+                <div class="card-header">
+                    <i class="fas fa-star"></i>
+                    <h3>Key Features</h3>
+                </div>
+                <div class="card-content">
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-brain"></i>
+                            <h4>ML-Powered Predictions</h4>
+                            <p>Advanced linear regression model trained on comprehensive dataset of 10,000+ competitive programmers for accurate rating predictions</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-exchange-alt"></i>
+                            <h4>Cross-Platform Support</h4>
+                            <p>Seamlessly convert ratings between CodeChef and CodeForces platforms with bidirectional prediction capabilities</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Statistical Accuracy</h4>
+                            <p>Built on comprehensive statistical analysis ensuring reliable and consistent rating predictions across different skill levels</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-rocket"></i>
+                            <h4>Real-Time Results</h4>
+                            <p>Instant predictions with beautiful animations and tier classifications to visualize your competitive programming journey</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h4>Responsive Design</h4>
+                            <p>Modern, mobile-friendly interface that works perfectly across all devices and screen sizes</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-medal"></i>
+                            <h4>Tier Recognition</h4>
+                            <p>Automatic tier classification with proper color coding and badges for different skill levels and achievements</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rating Input Section -->
+            <div class="card input-card hidden">                <div class="card-header">
+                    <i class="fas fa-keyboard"></i>
+                    <h3 class="input-title">Enter Your Rating</h3>
+                </div>
+                
+                <div class="card-content">
+                    <div class="input-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-star input-icon"></i>
+                            <input class="rating-input" type="number" placeholder="Your current rating" min="0" max="4000">
+                        </div>
+                        <button class="submit-btn">
+                            <span>Predict Rating</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <div class="rating-info">
+                        <div class="rating-range">
+                            <span class="range-label">Typical Range:</span>
+                            <span class="range-value" id="rating-range">800 - 3500</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Analytics Loading Screen -->
+                    <div class="analytics-loading hidden" id="analytics-loading">
+                        <div class="loading-header">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Analyzing Data...</h3>
+                        </div>
+                        <div class="loading-steps">
+                            <div class="step" id="step1">
+                                <i class="fas fa-database"></i>
+                                <span>Loading dataset...</span>
+                                <div class="step-progress"></div>
+                            </div>
+                            <div class="step" id="step2">
+                                <i class="fas fa-brain"></i>
+                                <span>Running ML model...</span>
+                                <div class="step-progress"></div>
+                            </div>
+                            <div class="step" id="step3">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Generating analytics...</span>
+                                <div class="step-progress"></div>
+                            </div>
+                        </div>
+                        <div class="data-visualization">
+                            <div class="mini-chart">
+                                <div class="chart-bars">
+                                    <div class="bar" style="height: 60%"></div>
+                                    <div class="bar" style="height: 80%"></div>
+                                    <div class="bar" style="height: 45%"></div>
+                                    <div class="bar" style="height: 90%"></div>
+                                    <div class="bar" style="height: 70%"></div>
+                                    <div class="bar" style="height: 85%"></div>
+                                </div>
+                                <span class="chart-label">Rating Distribution</span>
+                            </div>
+                            <div class="processing-stats">
+                                <div class="stat">
+                                    <span class="stat-number" id="processed-users">0</span>
+                                    <span class="stat-label">Users Analyzed</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number" id="accuracy-score">0</span>
+                                    <span class="stat-label">Accuracy %</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                </div>
+            </div>
+            
+            <!-- Result Section -->
+            <div class="card result-card hidden">                <div class="card-header">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Prediction Result</h3>
+                </div>
+                
+                <div class="card-content">
+                    <div class="result-layout">
+                        <!-- Main Result Display -->
+                        <div class="result-display">
+                            <div class="result-platform">
+                                <span class="platform-name" id="result-platform">CodeForces</span>
+                                <span class="rating-label">Predicted Rating</span>
+                            </div>
+                            <div class="predicted-rating" id="predicted-rating">1500</div>
+                            <div class="rating-tier" id="rating-tier">
+                                <i class="fas fa-medal"></i>
+                                <span>Expert</span>
+                            </div>
+                        </div>
+
+                        <!-- Analytics Graphs -->
+                        <div class="analytics-section">
+                            <div class="analytics-grid">
+                                <!-- Rating Progress Chart -->
+                                <div class="chart-container">
+                                    <h4>Rating Progression</h4>
+                                    <div class="progress-chart">
+                                        <svg viewBox="0 0 300 150" class="progress-svg">
+                                            <defs>
+                                                <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                    <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                                    <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                                                </linearGradient>
+                                            </defs>
+                                            <path id="progress-path" stroke="url(#progressGradient)" stroke-width="3" fill="none" />
+                                            <circle id="progress-dot" r="6" fill="#ffffff" stroke="url(#progressGradient)" stroke-width="3" />
+                                        </svg>
+                                        <div class="chart-labels">
+                                            <span>Start</span>
+                                            <span>Current</span>
+                                            <span>Predicted</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Circular Progress -->
+                                <div class="chart-container">
+                                    <h4>Skill Level</h4>
+                                    <div class="circular-progress">
+                                        <svg viewBox="0 0 120 120" class="circular-svg">
+                                            <circle cx="60" cy="60" r="50" fill="none" stroke="#334155" stroke-width="8"/>
+                                            <circle id="progress-circle" cx="60" cy="60" r="50" fill="none" 
+                                                    stroke="url(#progressGradient)" stroke-width="8" 
+                                                    stroke-dasharray="314" stroke-dashoffset="314" 
+                                                    stroke-linecap="round" transform="rotate(-90 60 60)"/>
+                                        </svg>
+                                        <div class="progress-percentage" id="skill-percentage">75%</div>
+                                    </div>
+                                </div>
+
+                                <!-- Rating Distribution -->
+                                <div class="chart-container full-width">
+                                    <h4>Platform Comparison</h4>
+                                    <div class="comparison-chart">
+                                        <div class="platform-bar">
+                                            <div class="bar-label">
+                                                <i class="fas fa-utensils"></i>
+                                                <span>CodeChef</span>
+                                            </div>
+                                            <div class="bar-track">
+                                                <div class="bar-fill codechef-bar" id="codechef-bar"></div>
+                                            </div>
+                                            <span class="bar-value" id="codechef-rating">0</span>
+                                        </div>
+                                        <div class="platform-bar">
+                                            <div class="bar-label">
+                                                <i class="fas fa-bolt"></i>
+                                                <span>CodeForces</span>
+                                            </div>
+                                            <div class="bar-track">
+                                                <div class="bar-fill codeforces-bar" id="codeforces-bar"></div>
+                                            </div>
+                                            <span class="bar-value" id="codeforces-rating">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="try-again-btn">
+                        <i class="fas fa-redo"></i>
+                        Try Another Platform
+                    </button>
+                </div>
+            </div>
         </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">                <div class="footer-text">
+                    <p>"Turning numbers into narratives, one rank at a time."</p>
+                    <span class="author">— PDS</span>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://github.com/princesiddharth1" target="_blank" class="social-link github-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/prince-deepak-siddharth-1b1476288/" target="_blank" class="social-link linkedin-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
     </div>
    <script src="script.js"></script>
-    
 </body>
 </html>

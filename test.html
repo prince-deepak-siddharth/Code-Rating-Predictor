@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CP Rating Predictor - Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: white;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .hidden {
+            display: none !important;
+        }
+        button {
+            background: #4285f4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        input {
+            background: #333;
+            color: white;
+            border: 1px solid #555;
+            padding: 10px;
+            border-radius: 5px;
+            width: 200px;
+        }
+        .result {
+            font-size: 2em;
+            font-weight: bold;
+            color: #4285f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CP Rating Predictor - Test</h1>
+        
+        <div class="card">
+            <h2>Platform Selection</h2>
+            <button onclick="selectPlatform('codechef')">CodeChef → CodeForces</button>
+            <button onclick="selectPlatform('codeforces')">CodeForces → CodeChef</button>
+        </div>
+        
+        <div class="card hidden" id="input-section">
+            <h2>Enter Rating</h2>
+            <p id="platform-info"></p>
+            <input type="number" id="rating-input" placeholder="Enter rating" min="0" max="4000">
+            <button onclick="predict()">Predict</button>
+        </div>
+        
+        <div class="card hidden" id="result-section">
+            <h2>Result</h2>
+            <p id="result-platform"></p>
+            <div class="result" id="predicted-rating">0</div>
+            <p id="tier-info"></p>
+            <button onclick="reset()">Try Again</button>
+        </div>
+    </div>
+
+    <script>
+        // ML Model coefficients
+        const MODEL = {
+            weight: 0.8315620555789324,
+            bias: -32.629265073164284
+        };
+
+        let currentPlatform = '';
+        let isConverting = false;
+
+        function selectPlatform(platform) {
+            currentPlatform = platform;
+            
+            const inputSection = document.getElementById('input-section');
+            const platformInfo = document.getElementById('platform-info');
+            
+            if (platform === 'codechef') {
+                platformInfo.textContent = 'Enter your CodeChef rating (will predict CodeForces)';
+                isConverting = false;
+            } else {
+                platformInfo.textContent = 'Enter your CodeForces rating (will predict CodeChef)';
+                isConverting = true;
+            }
+            
+            inputSection.classList.remove('hidden');
+        }
+
+        function predict() {
+            const rating = parseInt(document.getElementById('rating-input').value);
+            
+            if (!rating || rating < 0 || rating > 4000) {
+                alert('Please enter a valid rating between 0 and 4000');
+                return;
+            }
+
+            // Calculate prediction
+            let predictedRating;
+            let targetPlatform;
+            
+            if (isConverting) {
+                // CodeForces to CodeChef
+                predictedRating = Math.round((rating - MODEL.bias) / MODEL.weight);
+                targetPlatform = 'CodeChef';
+            } else {
+                // CodeChef to CodeForces
+                predictedRating = Math.round(rating * MODEL.weight + MODEL.bias);
+                targetPlatform = 'CodeForces';
+            }
+
+            // Ensure rating is within bounds
+            predictedRating = Math.max(0, Math.min(4000, predictedRating));
+
+            // Show result
+            document.getElementById('input-section').classList.add('hidden');
+            document.getElementById('result-section').classList.remove('hidden');
+            document.getElementById('result-platform').textContent = `Predicted ${targetPlatform} Rating:`;
+            document.getElementById('predicted-rating').textContent = predictedRating;
+            
+            // Simple tier classification
+            let tier = 'Unrated';
+            if (targetPlatform === 'CodeForces') {
+                if (predictedRating >= 1600) tier = 'Expert+';
+                else if (predictedRating >= 1400) tier = 'Specialist';
+                else if (predictedRating >= 1200) tier = 'Pupil';
+                else if (predictedRating > 0) tier = 'Newbie';
+            } else {
+                if (predictedRating >= 2000) tier = '5+ Star';
+                else if (predictedRating >= 1800) tier = '4 Star';
+                else if (predictedRating >= 1600) tier = '3 Star';
+                else if (predictedRating >= 1400) tier = '2 Star';
+                else if (predictedRating > 0) tier = '1 Star';
+            }
+            
+            document.getElementById('tier-info').textContent = `Tier: ${tier}`;
+        }
+
+        function reset() {
+            document.getElementById('input-section').classList.add('hidden');
+            document.getElementById('result-section').classList.add('hidden');
+            document.getElementById('rating-input').value = '';
+            currentPlatform = '';
+        }
+    </script>
+</body>
+</html>
