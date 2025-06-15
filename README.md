@@ -1,4 +1,4 @@
-# 🏆 CP Rating Predictor
+# 🏆 Code Rating Predictor
 
 <div align="center">
 
@@ -415,7 +415,6 @@ copies or substantial portions of the Software.
 
 ### **Prince Deepak Siddharth**
 
-[![GitHub](https://img.shields.io/badge/GitHub-princesiddharth1-black?style=for-the-badge&logo=github)](https://github.com/princesiddharth1)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-prince--deepak--siddharth-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/prince-deepak-siddharth-1b1476288/)
 
 *"Turning numbers into narratives, one rank at a time."*

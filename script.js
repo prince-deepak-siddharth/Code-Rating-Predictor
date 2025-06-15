@@ -168,9 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Show input card with animation
         showInputCard();
-    }
-
-    function updatePlatformUI(platform) {
+    }    function updatePlatformUI(platform) {
         if (platform === 'codechef') {
             elements.inputTitle.innerHTML = '<i class="fas fa-utensils"></i> Enter CodeChef Rating';
             elements.ratingInput.placeholder = 'Your CodeChef rating (e.g., 1500)';
@@ -180,7 +178,8 @@ document.addEventListener('DOMContentLoaded', function() {
             elements.inputTitle.innerHTML = '<i class="fas fa-bolt"></i> Enter CodeForces Rating';
             elements.ratingInput.placeholder = 'Your CodeForces rating (e.g., 1200)';
             elements.ratingRange.textContent = '0 - 3500 (typical)';
-            isConverting = true; // CodeForces to CodeChef        }
+            isConverting = true; // CodeForces to CodeChef
+        }
     }
 
     function showInputCard() {
@@ -217,9 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             showAnalyticsLoading(rating);
         }, 500);
-    }
-
-    function calculatePrediction(inputRating) {
+    }    function calculatePrediction(inputRating) {
         let predictedRating;
         let targetPlatform;
         
@@ -232,16 +229,16 @@ document.addEventListener('DOMContentLoaded', function() {
             predictedRating = Math.round(inputRating * MODEL.weight + MODEL.bias);
             targetPlatform = 'CodeForces';
         }
-
+        
         // Ensure rating is within reasonable bounds
         predictedRating = Math.max(0, Math.min(4000, predictedRating));
         
         return {
             rating: predictedRating,
-            platform: targetPlatform        };
+            platform: targetPlatform
+        };
     }    function showAnalyticsLoading(inputRating) {
         console.log('showAnalyticsLoading called with rating:', inputRating);
-        console.log('Analytics element exists:', !!elements.analyticsLoading);
         
         // Show analytics loading within the input card
         if (elements.analyticsLoading) {
@@ -250,10 +247,20 @@ document.addEventListener('DOMContentLoaded', function() {
             startAnalyticsAnimation(inputRating);
         } else {
             console.error('Analytics loading element not found!');
+            // Fallback in case analytics element doesn't exist
+            const predictedRating = calculatePrediction(inputRating);
+            showResult(predictedRating, inputRating);
         }
-    }
+    }    function startAnalyticsAnimation(inputRating) {
+        // Make sure the step elements exist
+        if (!elements.steps.step1 || !elements.steps.step2 || !elements.steps.step3) {
+            console.error('Missing step elements for animation');
+            // Fallback - skip animation and show result
+            const predictedRating = calculatePrediction(inputRating);
+            showResult(predictedRating, inputRating);
+            return;
+        }
 
-    function startAnalyticsAnimation(inputRating) {
         // Reset all steps
         Object.values(elements.steps).forEach(step => {
             step.classList.remove('active', 'completed');
@@ -262,7 +269,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Step 1: Loading dataset
         setTimeout(() => {
             elements.steps.step1.classList.add('active');
-            animateCounter(elements.processedUsers, 10247);
+            if (elements.processedUsers) {
+                animateCounter(elements.processedUsers, 10247);
+            }
         }, 500);
 
         // Step 2: Running ML model
@@ -270,7 +279,9 @@ document.addEventListener('DOMContentLoaded', function() {
             elements.steps.step1.classList.remove('active');
             elements.steps.step1.classList.add('completed');
             elements.steps.step2.classList.add('active');
-            animateCounter(elements.accuracyScore, 94);
+            if (elements.accuracyScore) {
+                animateCounter(elements.accuracyScore, 94);
+            }
         }, 2000);
 
         // Step 3: Generating analytics
@@ -288,40 +299,49 @@ document.addEventListener('DOMContentLoaded', function() {
             // Calculate prediction and show result
             const predictedRating = calculatePrediction(inputRating);
             showResult(predictedRating, inputRating);
-              // Reset submit button
-            elements.submitBtn.innerHTML = '<span>Predict Rating</span><i class="fas fa-arrow-right"></i>';
-            elements.submitBtn.disabled = false;
+            
+            // Reset submit button
+            if (elements.submitBtn) {
+                elements.submitBtn.innerHTML = '<span>Predict Rating</span><i class="fas fa-arrow-right"></i>';
+                elements.submitBtn.disabled = false;
+            }
         }, 5000);
-    }    function showResult(prediction, originalRating) {
+    }function showResult(prediction, originalRating) {
         console.log('showResult called with:', prediction, originalRating);
         
         // Hide analytics loading and input card
         if (elements.analyticsLoading) {
             elements.analyticsLoading.classList.add('hidden');
         }
-        elements.inputCard.classList.add('hidden');
+        
+        if (elements.inputCard) {
+            elements.inputCard.classList.add('hidden');
+        }
         
         setTimeout(() => {
-            elements.resultCard.classList.remove('hidden');
+            if (elements.resultCard) {
+                elements.resultCard.classList.remove('hidden');
+            } else {
+                console.error('Result card element not found!');
+                return; // Stop execution if result card is missing
+            }
             
             // Update main result display
             if (elements.resultPlatform) {
                 elements.resultPlatform.textContent = prediction.platform;
             }
+            
             if (elements.predictedRating) {
                 elements.predictedRating.textContent = prediction.rating;
+                // Animate the predicted rating number
+                animateCounter(elements.predictedRating, prediction.rating);
             }
             
             // Update rating tier
-            const tier = getRatingTier(prediction.rating, prediction.platform.toLowerCase());
             if (elements.ratingTier) {
+                const tier = getRatingTier(prediction.rating, prediction.platform.toLowerCase());
                 elements.ratingTier.innerHTML = `<i class="fas fa-medal"></i><span>${tier.name}</span>`;
                 elements.ratingTier.style.borderColor = tier.color;
-            }
-            
-            // Animate the predicted rating number
-            if (elements.predictedRating) {
-                animateCounter(elements.predictedRating, prediction.rating);
             }
             
             // Setup and animate charts
